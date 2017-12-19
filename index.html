@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>作用域与内存问题</title>
+</head>
+<body>
+<script type="text/javascript">
+    //  基本类型：一串数字；引用类型：可以是由多个类型构成的对象；
+    var person = new Object();
+    person.name = "xiaofang";
+    console.log(person.name);
+    // 赋值基本变量：赋值后独立存在，两个变量可以参加任意操作，互不影响
+    var num1 = 3;
+    var num2 = num1;
+    console.log(num1, num2);
+    num1.delete;
+    console.log(num1);
+    //  引用变量：赋值后公用一个对象，改变其中一个变量就会影响另外一个。
+    var obj1 = new Object;
+    var obj2 = obj1;
+    obj1.name = "xiaofang";
+    console.log(obj2.name);
+    //    传递参数:说不清楚，自己看代码
+    function addTen(num) {
+        num += 10;
+        return num;
+    }
+    var count = 20;
+    var result = addTen(count);
+    console.log("count:" + count + "\n" + "result" + result);
+    //
+    function setName(obj) {
+        obj.name = "xiaohou";
+    }
+    var person = new Object();
+    setName(person);
+    console.log(person, name);
+    //    检测数据类型
+    var a = 1;
+    var b = "xiaohong";
+    var c = true;
+    var d = undefined;
+    var e = null;
+    var f = new Object();
+    //    typeof 只能检测基本数据类型：字符串，数字，布尔，undefined
+    console.log(typeof c);
+    //    instanceof 检测引用类型 null object 语法： restlt =变量 instanceof 类型
+    console.log(f instanceof Object);//true 为是
+
+    //    执行环境以及作用域
+    var color = "blue";
+    function changeColor() {
+        if (color === "blue") {
+            color = "red";
+        }
+        else {
+            color = "blue";
+        }
+    }
+    changeColor();
+    console.log("Color is now" + color);
+    //作用域权限
+    var color="blue";
+    function changeColor() {
+        var anotherColor="red";
+        function  swapClors() {
+            var tempColor=anotherColor;
+            anotherColor=color;
+            color=tempColor;
+        }
+        console.log("swapColor:"+color);
+    }
+    changeColor();
+    console.log(color);
+    //查询标识符,搜索中，如果局部变量中存在定义的变量，则会停止搜做，否则用父级定义的变量
+    var color="blak";
+    function getColor() {
+        var color="red";
+        return color;
+    }
+    console.log(getColor());
+</script>
+</body>
+</html>
